@@ -12,8 +12,13 @@ new Vue({
 
 import {
   registerMicroApps,
-  addGlobalUncaughtErrorHandler
+  addGlobalUncaughtErrorHandler,
+  start
 } from 'qiankun';
+
+// 主应用使用location.hash区分微应用，activeRule写法：
+const getActiveRule = (hash) => (location) => location.hash.startsWith(hash);
+
 // 注册微应用
 registerMicroApps(
   [
@@ -24,13 +29,17 @@ registerMicroApps(
       entry: '//localhost:9526',
       // 微应用在主应用挂载的容器节点的选择器
       container: '#micro',
-      // 微应用的激活规则(当路由与激活规则匹配时就会触发加载相应的子应用)
-      activeRule: '/sub_app/',
+      /*
+       * 微应用的激活规则(当路由与激活规则匹配时就会触发加载相应的子应用)
+       * 1、主应用使用location.pathname区分微应用，微应用可以是hash和history模式；history模式设置路由base即可。
+       * 2、主应用使用location.hash区分微应用，则微应用都是hash模式区分，主应用路由模式不限
+       */
+      activeRule: getActiveRule('#/sub_app'),
       // 传递给子应用的参数
       props: {
-        routerBase: '/sub_app/',
+        routerBase: '/sub_app',
       }
-    }
+    },
   ],
   // 微应用生命周期
   {

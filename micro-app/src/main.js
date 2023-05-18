@@ -1,7 +1,7 @@
 // qiankun应用注入publicPath，在入口最顶层引入
 import './public-path'; 
 import VueRouter from 'vue-router';
-import { routes, routerHooks } from '@/router'
+import routes, { transverseRoutes, routerHooks }  from '@/router'
 import store from '@/store'
 import Vue from 'vue'
 import App from './App.vue'
@@ -11,16 +11,17 @@ Vue.use(VueRouter);
 
 let router = null;
 let instance = null;
+
 function render(props = {}) {
   const { container, routerBase } = props;
-  console.log(window.__POWERED_BY_QIANKUN__)
+  let rawRoutes = transverseRoutes(routes, routerBase);
   router = new VueRouter({
-    base: routerBase ? routerBase : '/', // 微应用base值需和activeRule是一样的
-    mode: 'history',
-    routes,
+    // base: routerBase ? routerBase : '/', // 微应用base值需和activeRule是一样的
+    // mode: 'history',
+    routes: rawRoutes
   });
   routerHooks(router);
-  console.log(routes)
+  console.log(rawRoutes)
   instance = new Vue({
     router,
     store,

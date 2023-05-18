@@ -18,18 +18,18 @@ export default {
         sandbox: true, // 默认情况下沙箱可以确保单实例场景子应用之间的样式隔离，但是无法确保主应用跟子应用、或者多实例场景的子应用样式隔离
         singular: true, // 是否为单实例场景，单实例指的是同一时间只会渲染一个微应用
         // 解决拉取微应用 entry 时 cookie 未携带的问题
-        // fetch(url, ...args) {
-        //   // 给指定的微应用 entry 开启跨域请求
-        //   if (url === 'http://app.alipay.com/entry.html') {
-        //     return window.fetch(url, {
-        //       ...args,
-        //       mode: 'cors',
-        //       credentials: 'include',
-        //     });
-        //   }
+        fetch(url, ...args) {
+          // 给指定的微应用 entry 开启跨域请求
+          if (url === 'https://10.0.5.211/index.html') {
+            return window.fetch(url, {
+              ...args,
+              mode: 'cors',
+              credentials: 'include',
+            });
+          }
 
-        //   return window.fetch(url, ...args);
-        // },
+          return window.fetch(url, ...args);
+        },
       });
     }
   },

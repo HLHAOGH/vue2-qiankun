@@ -34,6 +34,11 @@ module.exports = {
 
   // webpack配置(webpack-merge合并)
   configureWebpack: {
+    // 分离polyfill和业务代码打包chunk(兼容IE)
+    entry: {
+      polyfill: ['core-js/stable', 'regenerator-runtime', 'whatwg-fetch', 'core-js/web/url', 'custom-event-polyfill'],
+      main: './src/main.js',
+    },
     output: {
       library: `${name}-[name]`,
       libraryTarget: 'umd', // 把微应用打包成 umd 库格式
@@ -62,7 +67,10 @@ module.exports = {
             priority: 10,
             chunks: 'initial',
           }
-        }
+        },
+        chunks(chunk) {
+          return chunk.name !== 'polyfill';
+        },
       }
     },
     plugins: []

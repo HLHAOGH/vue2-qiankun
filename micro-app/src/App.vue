@@ -1,9 +1,7 @@
 <template>
   <!-- 子应用容器 -->
   <div id="micro-app">
-    <transition mode="out-in">
-      <router-view></router-view>
-    </transition>
+    <router-view></router-view>
   </div>
 </template>
 
