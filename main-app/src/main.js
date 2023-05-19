@@ -16,6 +16,8 @@ import {
   start
 } from 'qiankun';
 
+let IS_DEV = process.env.NODE_ENV === 'development'; // 判断是否开发环境
+
 // 主应用使用location.hash区分微应用，activeRule写法：
 const getActiveRule = (hash) => (location) => location.hash.startsWith(hash);
 
@@ -25,8 +27,8 @@ registerMicroApps(
     {
       // 微应用名称
       name: 'micro-app',
-      // 入口路径
-      entry: '//localhost:9526',
+      // 入口路径，如果部署使用Nginx代理的话，entry值为微应用打包配置的publicPath路径，同时需部署在同名publicPath目录下
+      entry: IS_DEV ? '//localhost:9526/app1' : '/app1/',
       // 微应用在主应用挂载的容器节点的选择器
       container: '#micro',
       /*

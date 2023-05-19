@@ -7,7 +7,7 @@ const resolve = dir => {
 
 module.exports = {
   // 默认根目录
-  publicPath: '/',
+  publicPath: '/app1/',
   outputDir: 'dist',
   assetsDir: 'assets',
   lintOnSave: false,
