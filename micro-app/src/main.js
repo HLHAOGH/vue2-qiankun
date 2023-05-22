@@ -21,7 +21,7 @@ function render(props = {}) {
     routes: rawRoutes
   });
   routerHooks(router);
-  // console.log(rawRoutes)
+  console.log(rawRoutes)
   instance = new Vue({
     router,
     store,

@@ -33,5 +33,8 @@ export default {
       });
     }
   },
+  destroyed() {
+    window.qiankunStarted = false;
+  }
 };
 </script>

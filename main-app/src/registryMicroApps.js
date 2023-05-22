@@ -2,7 +2,7 @@
 import {
   registerMicroApps,
   addGlobalUncaughtErrorHandler,
-  initGlobalState
+  initGlobalState,
 } from 'qiankun';
 
 let IS_DEV = process.env.NODE_ENV === 'development'; // 判断是否开发环境

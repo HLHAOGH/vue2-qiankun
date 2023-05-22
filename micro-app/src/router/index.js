@@ -8,7 +8,7 @@ export const transverseRoutes = (routes = [], base = '') => {
     if (route.children && route.children.length) {
       transverseRoutes(route)
     } else {
-      route.path = base + route.path;
+      route.path = route.path.indexOf(base) > -1 ? route.path : (base || '') + route.path;
     }
   })
   return routes
